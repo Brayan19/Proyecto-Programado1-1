@@ -1,0 +1,49 @@
+//
+// Agregar_amigos.c
+//
+// Modified by Brayan Blanco
+//
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+//crea el struct para almacenar el usuario
+struct usuario{
+    char *nombre;
+    char *ipa;
+    char *puerto;
+};
+
+
+
+void agregar()
+{
+	char nombre_usuario[10];
+	char ip[16];
+	char port[8];
+	printf("Digite el nombre del usuario a agregar\n");
+	scanf("%s",nombre_usuario); //guarda el nombre
+    
+	printf("Digite el ip del usuario:\n");
+	scanf("%s",ip); //guarda el ip
+	
+    printf("Digite el puerto de comunicacion\n");
+	scanf("%s",port);
+    
+    
+	struct usuario temp; //crea un struct para guardar en archivo
+    
+    //Cargar datos a struct
+    temp.nombre = nombre_usuario;
+    temp.ipa = ip;
+    temp.puerto = port;
+	printf("\n");
+    
+	FILE *pointer;
+	pointer = fopen("amigos.txt", "a");
+	fprintf(pointer, "%s %s %s\n", temp.nombre, temp.ipa, temp.puerto);
+	fclose (pointer);
+}
+
