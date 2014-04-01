@@ -1,0 +1,55 @@
+//
+//  escoger3.c
+//  Created by Brayan Blanco
+//
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+struct amigo {
+    char *name;
+    char *ip;
+    char *port;
+}; //end struct
+
+
+struct amigo escojo(char *otro)
+{
+//    char otro[] = "P";
+    char cadena[80]; //tamaño máximo de la línea
+    char nombre[10], ipa[16];
+    char puerto[8];
+    int var_control =0, i;
+    
+    
+    // Struct para almacenar el amigo a conectar
+
+    
+    struct amigo chat;
+    
+    
+    FILE *puntero;
+    
+    puntero = fopen("amigos.txt", "r"); //abre el archivo de los contactos
+    
+
+    
+    do{
+        fscanf(puntero, "%s %s %s", nombre, ipa, puerto);
+        //printf("%s\t%s\t%d\n", nombre, ipa, puerto);
+        i = (strcmp(otro, nombre));
+        if (i==0){
+            chat.name = nombre;
+            chat.ip = ipa;
+            chat.port = puerto;
+            var_control =1;
+        } //end if
+        else
+            var_control =2;
+    }while ((fgets(cadena, 100, puntero) != NULL)&&(var_control !=1));
+    
+    
+    fclose(puntero); //cierra el archivo
+    return chat;
+}
+
